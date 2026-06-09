@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/subject_data.dart';
 import '../widgets/subject_card.dart';
+import 'subject_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -62,7 +63,16 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return SubjectCard(
                     subject: subjects[index],
-                    onTap: () {},
+                    onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                            builder: (_) => SubjectScreen(
+                                subject: subjects[index],
+                            ),
+                            ),
+                        );
+                      },
                   );
                 },
               ),
