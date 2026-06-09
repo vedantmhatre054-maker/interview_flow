@@ -21,15 +21,40 @@ class _HomeScreenState extends State<HomeScreen> {
     return total / subjects.length;
   }
 
+  int getCompletedTopics() {
+    int count = 0;
+
+    for (var subject in subjects) {
+      count += subject.completed.where((e) => e).length;
+    }
+
+    return count;
+  }
+
+  int getTotalTopics() {
+    int count = 0;
+
+    for (var subject in subjects) {
+      count += subject.topics.length;
+    }
+
+    return count;
+  }
+
   @override
   Widget build(BuildContext context) {
     double overall = calculateOverallProgress();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("InterviewFlow"),
+        title: const Text(
+            "InterviewFlow",
+            style: TextStyle(
+            fontWeight: FontWeight.bold,
+            ),
+        ),
         centerTitle: true,
-      ),
+        ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -54,6 +79,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      "Completed Topics: ${getCompletedTopics()}",
+                    ),
+                    Text(
+                      "Remaining Topics: ${getTotalTopics() - getCompletedTopics()}",
                     ),
                   ],
                 ),

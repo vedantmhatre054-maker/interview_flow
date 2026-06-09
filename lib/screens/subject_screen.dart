@@ -15,22 +15,48 @@ class _SubjectScreenState extends State<SubjectScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.subject.name),
+            title: Text(
+        widget.subject.name,
+        style: const TextStyle(
+            fontWeight: FontWeight.bold,
+        ),
+        ),
       ),
-      body: ListView.builder(
-        itemCount: widget.subject.topics.length,
-        itemBuilder: (context, index) {
-          return CheckboxListTile(
-            title: Text(widget.subject.topics[index]),
-            value: widget.subject.completed[index],
-            onChanged: (value) {
-              setState(() {
-                widget.subject.completed[index] = value!;
-              });
-            },
-          );
-        },
+      body: Column(
+        children: [
+            Padding(
+            padding: const EdgeInsets.all(16),
+            child: LinearProgressIndicator(
+                value: widget.subject.progress / 100,
+            ),
+            ),
+
+            Text(
+            "${widget.subject.progress.toStringAsFixed(0)}% Completed",
+            style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+            ),
+            ),
+
+            Expanded(
+            child: ListView.builder(
+                itemCount: widget.subject.topics.length,
+                itemBuilder: (context, index) {
+                return CheckboxListTile(
+                    title: Text(widget.subject.topics[index]),
+                    value: widget.subject.completed[index],
+                    onChanged: (value) {
+                    setState(() {
+                        widget.subject.completed[index] = value!;
+                    });
+                    },
+                );
+               },
+            ),
+           ),
+        ],
       ),
-    );
+    ); 
   }
 }

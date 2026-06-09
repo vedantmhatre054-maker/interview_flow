@@ -13,12 +13,24 @@ class SubjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int completedCount =
+        subject.completed.where((item) => item).length;
+
     return Card(
       elevation: 4,
       child: ListTile(
         title: Text(subject.name),
-        subtitle: Text(
-          "${subject.progress.toStringAsFixed(0)}% Completed",
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "$completedCount / ${subject.topics.length} Topics Completed",
+            ),
+            const SizedBox(height: 5),
+            LinearProgressIndicator(
+              value: subject.progress / 100,
+            ),
+          ],
         ),
         trailing: const Icon(Icons.arrow_forward_ios),
         onTap: onTap,
