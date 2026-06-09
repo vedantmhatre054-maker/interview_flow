@@ -47,37 +47,49 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
         title: const Text(
-            "InterviewFlow",
-            style: TextStyle(
-            fontWeight: FontWeight.bold,
-            ),
+          "InterviewFlow",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        ),
+      ),
+      backgroundColor: Colors.grey.shade100,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             Card(
+              color: Colors.deepPurple.shade50,
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
                     const Text(
                       "Overall Progress",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 10),
                     LinearProgressIndicator(
                       value: overall / 100,
+                      minHeight: 10,
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       "${overall.toStringAsFixed(0)}%",
                       style: const TextStyle(
-                        fontSize: 22,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
+                        color: Colors.deepPurple,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -91,9 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
-
             Expanded(
               child: ListView.builder(
                 itemCount: subjects.length,

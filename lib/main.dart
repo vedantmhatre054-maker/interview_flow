@@ -15,7 +15,8 @@ class InterviewFlowApp extends StatelessWidget {
       title: 'InterviewFlow',
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Colors.indigo,
+        colorSchemeSeed: Colors.deepPurple,
+        scaffoldBackgroundColor: Colors.grey.shade100,
       ),
       home: const HomeScreen(),
     );

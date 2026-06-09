@@ -17,9 +17,18 @@ class SubjectCard extends StatelessWidget {
         subject.completed.where((item) => item).length;
 
     return Card(
-      elevation: 4,
+      color: Colors.white,
+      elevation: 6,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: ListTile(
-        title: Text(subject.name),
+        title: Text(
+          subject.name,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,10 +38,14 @@ class SubjectCard extends StatelessWidget {
             const SizedBox(height: 5),
             LinearProgressIndicator(
               value: subject.progress / 100,
+              borderRadius: BorderRadius.circular(10),
             ),
           ],
         ),
-        trailing: const Icon(Icons.arrow_forward_ios),
+        trailing: const Icon(
+          Icons.arrow_forward_ios,
+          color: Colors.deepPurple,
+        ),
         onTap: onTap,
       ),
     );
