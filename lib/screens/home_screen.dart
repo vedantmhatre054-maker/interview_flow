@@ -3,9 +3,14 @@ import '../data/subject_data.dart';
 import '../widgets/subject_card.dart';
 import 'subject_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   double calculateOverallProgress() {
     double total = 0;
 
@@ -31,21 +36,21 @@ class HomeScreen extends StatelessWidget {
           children: [
             Card(
               child: Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       "Overall Progress",
                       style: TextStyle(fontSize: 18),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     LinearProgressIndicator(
                       value: overall / 100,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       "${overall.toStringAsFixed(0)}%",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
@@ -55,7 +60,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             Expanded(
               child: ListView.builder(
@@ -63,16 +68,17 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return SubjectCard(
                     subject: subjects[index],
-                    onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                            builder: (_) => SubjectScreen(
-                                subject: subjects[index],
-                            ),
-                            ),
-                        );
-                      },
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              SubjectScreen(subject: subjects[index]),
+                        ),
+                      );
+
+                      setState(() {});
+                    },
                   );
                 },
               ),
